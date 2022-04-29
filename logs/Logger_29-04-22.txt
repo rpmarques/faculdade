@@ -1,0 +1,6 @@
+[22:43:55][::1]-> USUARIO:[Ricardo] - LOGOU NO SISTEMA 
+[22:43:55][::1]-> USUARIO:[Ricardo] - ARQUIVO:[C:\xampp\htdocs\faculdade\classes\clientes.class.php] - LINHA:[153] - Mensagem:[SQLSTATE[42S02]: Base table or view not found: 1146 Table 'faculdade.cliente' doesn't exist] 
+[22:43:55][::1]-> USUARIO:[Ricardo] - ARQUIVO:[C:\xampp\htdocs\faculdade\classes\fornecedores.class.php] - LINHA:[154] - Mensagem:[SQLSTATE[42S02]: Base table or view not found: 1146 Table 'faculdade.fornec' doesn't exist] 
+[22:45:57][::1]-> USUARIO:[Ricardo] - ARQUIVO:[C:\xampp\htdocs\faculdade\classes\clientes.class.php] - LINHA:[153] - Mensagem:[SQLSTATE[42S02]: Base table or view not found: 1146 Table 'faculdade.cliente' doesn't exist] 
+[22:45:57][::1]-> USUARIO:[Ricardo] - ARQUIVO:[C:\xampp\htdocs\faculdade\classes\fornecedores.class.php] - LINHA:[154] - Mensagem:[SQLSTATE[42S02]: Base table or view not found: 1146 Table 'faculdade.fornec' doesn't exist] 
+[22:45:57][::1]-> USUARIO:[Ricardo] - ARQUIVO:[C:\xampp\htdocs\faculdade\classes\fornecedores.class.php] - LINHA:[154] - Mensagem:[SQLSTATE[42S02]: Base table or view not found: 1146 Table 'faculdade.fornec' doesn't exist] 

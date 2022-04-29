@@ -1,0 +1,1 @@
+ALTER TABLE `ctpag` ADD COLUMN `valor_pago` FLOAT DEFAULT 0;
