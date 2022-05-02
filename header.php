@@ -3,16 +3,8 @@ require_once './classes/funcoes.class.php';
 require_once './classes/logger.class.php';
 require_once './classes/conexao.class.php';
 require_once './classes/usuarios.class.php';
-require_once './classes/clientes.class.php';
-$objClientes = Clientes::getInstance(Conexao::getInstance());
-require_once './classes/fornecedores.class.php';
-$objFornecedores = Fornecedores::getInstance(Conexao::getInstance());
-require_once './classes/ctPag.class.php';
-$objContasPagar = CtPag::getInstance(Conexao::getInstance());
-require_once './classes/ctRec.class.php';
-$objContasReceber = CtRec::getInstance(Conexao::getInstance());
-require_once './classes/formaPgto.class.php';
-$objFormaPgto = formaPgto::getInstance(Conexao::getInstance());
+require_once './classes/semestre.class.php';
+$objSemestre = Semestre::getInstance(Conexao::getInstance());
 session_start();
 if (!isset($_SESSION['login'])) {
   vaiPraPagina('index');

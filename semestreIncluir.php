@@ -1,9 +1,10 @@
 <?php
 require_once './header.php';
 if ($_POST) {
-  if (isset($_POST['nome'])) {
-    $nome = $_POST['nome'];
-    $ret = $objFormaPgto->insert($nome);
+  if (isset($_POST['ano'])) {
+    $ano = $_POST['ano'];
+    $semestre = $_POST['semestre'];
+    $ret = $objSemestre->insert($ano, $semestre, $_SESSION['usuario_id']);
   }
 }
 ?>
@@ -28,16 +29,22 @@ if ($_POST) {
           <!-- general form elements -->
           <div class="card card-primary">
             <div class="card-header">
-              <h3 class="card-title">Cadastrar Forma de Pagamento</h3>
+              <h3 class="card-title">Cadastrar Semestre</h3>
             </div> <!-- /.card-header -->
             <!-- form start -->
             <form method="post">
               <div class="card-body">
                 <div class="row">
-                  <div class="col-md-12">
+                  <div class="col-md-6">
                     <div class="form-group">
-                      <label>Nome</label>
-                      <input type="text" class="form-control form-control-sm" name="nome">
+                      <label>Ano</label>
+                      <input type="text" class="form-control form-control-sm" name="ano">
+                    </div>
+                  </div>
+                  <div class="col-md-6">
+                    <div class="form-group">
+                      <label>Semestre</label>
+                      <input type="text" class="form-control form-control-sm" name="semestre">
                     </div>
                   </div>
                 </div>

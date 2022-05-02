@@ -16,13 +16,13 @@
           <!-- small card -->
           <div class="small-box bg-info">
             <div class="inner">
-              <h3><?= $objClientes->contaClientes(); ?></h3>
+              <h3><?= $objSemestre->contaSemestres($_SESSION['usuario_id']); ?></h3>
               <p>Semestres </p>
             </div>
             <div class="icon">
               <i class="fas fa-shopping-cart"></i>
             </div>
-            <a href="./clienteIncluir.php" class="small-box-footer"> Novo <i class="fas fa-plus-circle"></i> </a>
+            <a href="./semestreIncluir.php" class="small-box-footer"> Novo <i class="fas fa-plus-circle"></i> </a>
             <a href="./clienteListar.php" class="small-box-footer"> Listar <i class="fas fa-arrow-circle-right"></i> </a>
           </div>
         </div> <!-- ./col -->
@@ -30,7 +30,7 @@
           <!-- small card -->
           <div class="small-box bg-info">
             <div class="inner">
-              <h3><?= $objFornecedores->contaFornecedores(); ?></h3>
+              <h3></h3>
               <p>Matérias </p>
             </div>
             <div class="icon">
@@ -44,7 +44,7 @@
           <!-- small card -->
           <div class="small-box bg-info">
             <div class="inner">
-              <h3><?= $objFornecedores->contaFornecedores(); ?></h3>
+              <h3></h3>
               <p>Atividades </p>
             </div>
             <div class="icon">

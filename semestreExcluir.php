@@ -2,17 +2,15 @@
 require_once './header.php';
 if ($_GET) {
   if (isset($_GET['id'])) {
-    $formaID = base64_decode($_GET['id']);
-    $formaPgto = $objFormaPgto->pegaFormaPgto($formaID);
+    $semestreID = base64_decode($_GET['id']);
+    $semestre = $objSemestre->pegaSemestre($semestreID, $_SESSION['usuario_id']);
   }
 }
 if ($_POST) {
   if (isset($_POST['id'])) {
-    $nome = $_POST['nome'];
     $formaID = $_POST['id'];
-
-    $ret = $objFormaPgto->update($nome, $formaID);
-    $formaPgto = $objFormaPgto->pegaFormaPgto($formaID);
+    $ret = $objSemestre->delete($semestreID, $_SESSION['usuario_id']);
+    $semestre = $objSemestre->pegaSemestre($semestreID, $_SESSION['usuario_id']);
   }
 }
 ?>
@@ -33,26 +31,32 @@ if ($_POST) {
               require_once './alertaErro.php.php';
             }
           }
-          if (!empty($formaPgto)) { ?>
-            <div class="card card-success">
+          if (!empty($semestre)) { ?>
+            <div class="card card-danger">
               <div class="card-header">
-                <h3 class="card-title">Edição de Forma de Pagamento</h3>
+                <h3 class="card-title">Exclusão de formaPgto</h3>
               </div> <!-- /.card-header -->
               <!-- form start -->
               <form method="post">
-                <input type="hidden" value="<?= $formaPgto->id; ?>" name="id">
+                <input type="hidden" value="<?= $semestre->id; ?>" name="id">
                 <div class="card-body">
                   <div class="row">
-                    <div class="col-md-12">
+                    <div class="col-md-6">
                       <div class="form-group">
-                        <label>Nome</label>
-                        <input type="text" class="form-control form-control-sm" name="nome" value="<?= $formaPgto->nome; ?>">
+                        <label>Ano</label>
+                        <input type="text" class="form-control form-control-sm" name="nome" value="<?= $semestre->ano; ?>">
+                      </div>
+                    </div>
+                    <div class="col-md-6">
+                      <div class="form-group">
+                        <label>Semestre</label>
+                        <input type="text" class="form-control form-control-sm" name="nome" value="<?= $semestre->semestre; ?>">
                       </div>
                     </div>
                   </div>
                 </div> <!-- /.card-body -->
                 <div class="card-footer">
-                  <button type="submit" class="btn btn-success">Gravar</button>
+                  <button type="submit" class="btn btn-danger">Excluir</button>
                 </div>
               </form>
             </div> <!-- /.card -->

@@ -1,11 +1,11 @@
 <?php
 
-class Semestres
+class Semestre
 {
    // Atributo para conexão com o banco de dados   
    private $pdo = null;
    // Atributo estático para instância da própria classe    
-   private static $semestres = null;
+   private static $semestre = null;
 
    private function __construct($conexao)
    {
@@ -14,21 +14,22 @@ class Semestres
 
    public static function getInstance($conexao)
    {
-      if (!isset(self::$semestres)) :
-         self::$semestres = new Semestres($conexao);
+      if (!isset(self::$semestre)) :
+         self::$semestre = new Semestre($conexao);
       endif;
-      return self::$semestres;
+      return self::$semestre;
    }
 
    public function insert($rAno, $rSemestre, $rUsuarioID)
    {
       try {
-         $rSql = "INSERT INTO  semestre  (ano,semestre,usuario_id) VALUE (:ano,:semestre,:usuario_id);";
+         $rSql = "INSERT INTO  semestre  (ano,semestre,usuario_id) VALUES (:ano,:semestre,:usuario_id);";
          $stm = $this->pdo->prepare($rSql);
          $stm->bindValue(':ano', $rAno);
          $stm->bindValue(':semestre', $rSemestre);
          $stm->bindValue(':usuario_id', $rUsuarioID);
          $stm->execute();
+         LoggerSQL($rSql);
          if ($stm) {
             Logger('Usuario:[' . $_SESSION['login'] . '] - INSERIU SEMESTRE');
          }
@@ -37,32 +38,36 @@ class Semestres
          Logger('USUARIO:[' . $_SESSION['login'] . '] - ARQUIVO:[' . $erro->getFile() . '] - LINHA:[' . $erro->getLine() . '] - Mensagem:[' . $erro->getMessage() . ']');
       }
    }
-   public function update($rNome, $rID)
+
+   public function update($rAno, $rSemestre, $rID, $rUsuarioID)
    {
       try {
-         $sql = "UPDATE base_categoria SET nome=:nome WHERE id = :id;";
+         $sql = "UPDATE semestre SET ano=:ano,semestre=:semestre WHERE id = :id AND usuario_id=:usuario_id;";
          $stm = $this->pdo->prepare($sql);
-         $stm->bindValue(':nome', $rNome);
+         $stm->bindValue(':ano', $rAno);
+         $stm->bindValue(':semestre', $rSemestre);
          $stm->bindValue(':id', $rID);
+         $stm->bindValue(':usuario_id', $rUsuarioID);
          $stm->execute();
          if ($stm) {
-            Logger('Usuario:[' . $_SESSION['login'] . '] - ALTEROU CATEGORIA - ID:[' . $rID . ']');
+            Logger('Usuario:[' . $_SESSION['login'] . '] - ALTEROU SEMESTRE - ID:[' . $rID . ']');
          }
          return $stm;
       } catch (PDOException $erro) {
          Logger('USUARIO:[' . $_SESSION['login'] . '] - ARQUIVO:[' . $erro->getFile() . '] - LINHA:[' . $erro->getLine() . '] - MENSAGEM:[' . $erro->getMessage() . ']');
       }
    }
-   public function delete($rId)
+   public function delete($rID, $rUsuarioID)
    {
-      if (!empty($rId)) :
+      if (!empty($rID)) :
          try {
-            $sql = "DELETE FROM base_categoria WHERE id=:id";
+            $sql = "DELETE FROM semestre WHERE id=:id AND usuario_id=:usuario_id";
             $stm = $this->pdo->prepare($sql);
-            $stm->bindValue(':id', $rId);
+            $stm->bindValue(':id', $rID);
+            $stm->bindValue(':usuario_id', $rUsuarioID);
             $stm->execute();
             if ($stm) {
-               Logger('Usuario:[' . $_SESSION['login'] . '] - EXCLUIU CATEGORIA - ID:[' . $rId . ']');
+               Logger('Usuario:[' . $_SESSION['login'] . '] - EXCLUIU SEMESTRE - ID:[' . $rID . ']');
             }
             return $stm;
          } catch (PDOException $erro) {
@@ -70,10 +75,14 @@ class Semestres
          }
       endif;
    }
-   public function select($rWhere = '')
+
+   public function select($rUsuarioID, $rWhere = "")
    {
       try {
-         $sql = "SELECT * FROM base_categoria " . $rWhere;
+         if (!empty($rWhere)) {
+            $rWhere .= " AND $rWhere";
+         }
+         $sql = "SELECT * FROM semestre WHERE usuario_id=$rUsuarioID $rWhere ";
          $stm = $this->pdo->prepare($sql);
          $stm->execute();
          $dados = $stm->fetchAll(PDO::FETCH_OBJ);
@@ -138,16 +147,33 @@ class Semestres
          Logger('Usuario:[' . $_SESSION['login'] . '] - Arquivo:' . $erro->getFile() . ' Erro na linha:' . $erro->getLine() . ' - Mensagem:' . $erro->getMessage());
       }
    }
-   public function contaCategoria($rCondicao)
+   public function contaSemestres($rUsuarioID, $rCondicao = "")
    {
       try {
-         $sql = "SELECT count(id) AS total FROM base_categoria " . $rCondicao;
+         $waux = "";
+         if (!empty($rCondicao)) {
+            $waux = " AND $rCondicao  ";
+         }
+         $sql = "SELECT count(id) AS total FROM semestre WHERE usuario_id=$rUsuarioID  $waux ";
+         $stm = $this->pdo->prepare($sql);
+         $stm->execute();
+         $dados = $stm->fetch(PDO::FETCH_OBJ);
+         return $dados->total;
+      } catch (PDOException $erro) {
+         Logger('USUARIO:[' . $_SESSION['login'] . '] - ARQUIVO:[' . $erro->getFile() . '] - LINHA:[' . $erro->getLine() . '] - Mensagem:[' . $erro->getMessage() . ']');
+      }
+   }
+
+   public function pegaSemestre($rID, $rUsuarioID)
+   {
+      try {
+         $sql = "SELECT * FROM semestre WHERE id=$rID AND usuario_id=$rUsuarioID";
          $stm = $this->pdo->prepare($sql);
          $stm->execute();
          $dados = $stm->fetch(PDO::FETCH_OBJ);
          return $dados;
       } catch (PDOException $erro) {
-         Logger('USUARIO:[' . $_SESSION['login'] . '] - ARQUIVO:[' . $erro->getFile() . '] - LINHA:[' . $erro->getLine() . '] - Mensagem:[' . $erro->getMessage() . ']');
+         Logger('USUARIO:[' . $_SESSION['login'] . '] - ARQUIVO:[' . $erro->getFile() . '] - LINHA:[' . $erro->getLine() . '] - Mensagem:[' . $erro->getMessage() . '] - SQL:[' . $sql . ']');
       }
    }
 }
