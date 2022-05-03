@@ -5,6 +5,8 @@ require_once './classes/conexao.class.php';
 require_once './classes/usuarios.class.php';
 require_once './classes/semestre.class.php';
 $objSemestre = Semestre::getInstance(Conexao::getInstance());
+require_once './classes/materia.class.php';
+$objMateria = Materia::getInstance(Conexao::getInstance());
 session_start();
 if (!isset($_SESSION['login'])) {
   vaiPraPagina('index');

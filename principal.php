@@ -23,21 +23,21 @@
               <i class="fas fa-shopping-cart"></i>
             </div>
             <a href="./semestreIncluir.php" class="small-box-footer"> Novo <i class="fas fa-plus-circle"></i> </a>
-            <a href="./clienteListar.php" class="small-box-footer"> Listar <i class="fas fa-arrow-circle-right"></i> </a>
+            <a href="./semestreListar.php" class="small-box-footer"> Listar <i class="fas fa-arrow-circle-right"></i> </a>
           </div>
         </div> <!-- ./col -->
         <div class="col-lg-2 col-6">
           <!-- small card -->
           <div class="small-box bg-info">
             <div class="inner">
-              <h3></h3>
+              <h3><?= $objMateria->contaMaterias($_SESSION['usuario_id']); ?></h3>
               <p>Matérias </p>
             </div>
             <div class="icon">
               <i class="fas fa-shopping-cart"></i>
             </div>
-            <a href="./fornecedorIncluir.php" class="small-box-footer"> Novo <i class="fas fa-plus-circle"></i> </a>
-            <a href="./fornecedorListar.php" class="small-box-footer"> Listar <i class="fas fa-arrow-circle-right"></i> </a>
+            <a href="./materiaIncluir.php" class="small-box-footer"> Novo <i class="fas fa-plus-circle"></i> </a>
+            <a href="./materiaListar.php" class="small-box-footer"> Listar <i class="fas fa-arrow-circle-right"></i> </a>
           </div>
         </div><!-- ./col -->
         <div class="col-lg-2 col-6">
