@@ -10,8 +10,7 @@ if ($_POST) {
   if (isset($_POST['id'])) {
     $semestreID = $_POST['id'];
     $semestre = $_POST['semestre'];
-    $ano = $_POST['ano'];
-    $ret = $objSemestre->update($ano, $semestre, $semestreID, $_SESSION['usuario_id']);
+    $ret = $objSemestre->update($semestre, $semestreID, $_SESSION['usuario_id']);
     $semestre = $objSemestre->pegaSemestre($semestreID, $_SESSION['usuario_id']);
   }
 }
@@ -44,12 +43,6 @@ if ($_POST) {
                 <input type="hidden" value="<?= $semestre->id; ?>" name="id">
                 <div class="card-body">
                   <div class="row">
-                    <div class="col-md-6">
-                      <div class="form-group">
-                        <label>Ano</label>
-                        <input type="text" class="form-control form-control-sm" name="ano" value="<?= $semestre->ano; ?>">
-                      </div>
-                    </div>
                     <div class="col-md-6">
                       <div class="form-group">
                         <label>Semestre</label>

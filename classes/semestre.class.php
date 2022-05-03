@@ -20,12 +20,11 @@ class Semestre
       return self::$semestre;
    }
 
-   public function insert($rAno, $rSemestre, $rUsuarioID)
+   public function insert($rSemestre, $rUsuarioID)
    {
       try {
-         $rSql = "INSERT INTO  semestre  (ano,semestre,usuario_id) VALUES (:ano,:semestre,:usuario_id);";
+         $rSql = "INSERT INTO  semestre  (semestre,usuario_id) VALUES (:semestre,:usuario_id);";
          $stm = $this->pdo->prepare($rSql);
-         $stm->bindValue(':ano', $rAno);
          $stm->bindValue(':semestre', $rSemestre);
          $stm->bindValue(':usuario_id', $rUsuarioID);
          $stm->execute();
@@ -39,12 +38,11 @@ class Semestre
       }
    }
 
-   public function update($rAno, $rSemestre, $rID, $rUsuarioID)
+   public function update($rSemestre, $rID, $rUsuarioID)
    {
       try {
-         $sql = "UPDATE semestre SET ano=:ano,semestre=:semestre WHERE id = :id AND usuario_id=:usuario_id;";
+         $sql = "UPDATE semestre SET semestre=:semestre WHERE id = :id AND usuario_id=:usuario_id;";
          $stm = $this->pdo->prepare($sql);
-         $stm->bindValue(':ano', $rAno);
          $stm->bindValue(':semestre', $rSemestre);
          $stm->bindValue(':id', $rID);
          $stm->bindValue(':usuario_id', $rUsuarioID);

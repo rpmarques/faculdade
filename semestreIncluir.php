@@ -1,10 +1,9 @@
 <?php
 require_once './header.php';
 if ($_POST) {
-  if (isset($_POST['ano'])) {
-    $ano = $_POST['ano'];
+  if (isset($_POST['semestre'])) {
     $semestre = $_POST['semestre'];
-    $ret = $objSemestre->insert($ano, $semestre, $_SESSION['usuario_id']);
+    $ret = $objSemestre->insert($semestre, $_SESSION['usuario_id']);
   }
 }
 ?>
@@ -35,12 +34,6 @@ if ($_POST) {
             <form method="post">
               <div class="card-body">
                 <div class="row">
-                  <div class="col-md-6">
-                    <div class="form-group">
-                      <label>Ano</label>
-                      <input type="text" class="form-control form-control-sm" name="ano">
-                    </div>
-                  </div>
                   <div class="col-md-6">
                     <div class="form-group">
                       <label>Semestre</label>

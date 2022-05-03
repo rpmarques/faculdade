@@ -19,8 +19,7 @@ require_once './header.php';
                             <table id="example1" class="table table-bordered table-striped table-sm">
                                 <thead>
                                     <tr>
-                                        <th>Ano</th>
-                                        <th>Nome</th>
+                                        <th>Semestre</th>
                                         <th>Ação</th>
                                     </tr>
                                 </thead>
@@ -29,7 +28,6 @@ require_once './header.php';
                                     $semestres = $objSemestre->select($_SESSION['usuario_id']);
                                     foreach ($semestres as $item) { ?>
                                         <tr>
-                                            <td><?= $item->ano; ?></td>
                                             <td><?= $item->semestre; ?></td>
                                             <td>
                                                 <a class="btn bg-gradient-primary btn-xs" href="./semestreEditar.php?id=<?= base64_encode($item->id) ?>"><i class="fa fa-edit"></i> Editar </a>

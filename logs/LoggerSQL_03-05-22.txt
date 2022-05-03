@@ -1,0 +1,3 @@
+[22:36:17][::1]-> INSERT INTO  semestre  (semestre,usuario_id) VALUES (:semestre,:usuario_id); 
+[22:36:28][::1]-> INSERT INTO  semestre  (semestre,usuario_id) VALUES (:semestre,:usuario_id); 
+[22:36:43][::1]-> INSERT INTO  semestre  (semestre,usuario_id) VALUES (:semestre,:usuario_id); 
