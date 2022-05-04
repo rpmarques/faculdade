@@ -101,13 +101,13 @@ class Semestre
          Logger('Usuario:[' . $_SESSION['login'] . '] - Arquivo:' . $erro->getFile() . ' Erro na linha:' . $erro->getLine() . ' - Mensagem:' . $erro->getMessage());
       }
    }
-   public function montaSelect($rNome = 'categoria_id', $rSelecionado = null)
+   public function montaSelect($rNome = 'semestre_id', $rSelecionado = null)
    {
       try {
-         $objCategorias = Categorias::getInstance(Conexao::getInstance());
-         $dados = $objCategorias->select();
+         $objSemestre = Semestre::getInstance(Conexao::getInstance());
+         $dados = $objSemestre->select("1");
          $select = '';
-         $select = '<select class="select2" name="' . $rNome . '" id="' . $rNome . '" data-placeholder="Escolha uma categoria..."  style="width: 100%;">'
+         $select = '<select class="select2" name="' . $rNome . '" id="' . $rNome . '" data-placeholder="Semestre..."  style="width: 100%;">'
             . '<option value="">&nbsp;</option>';
          foreach ($dados as $linhaDB) {
             if (!empty($rSelecionado) && $rSelecionado === $linhaDB->id) {
@@ -115,7 +115,7 @@ class Semestre
             } else {
                $sAdd = '';
             }
-            $select .= '<option value="' . $linhaDB->id . '"' . $sAdd . '>' . $linhaDB->nome . '</option>';
+            $select .= '<option value="' . $linhaDB->id . '"' . $sAdd . '>' . $linhaDB->semestre . '</option>';
          }
          $select .= '</select>';
          return $select;
@@ -123,28 +123,7 @@ class Semestre
          Logger('Usuario:[' . $_SESSION['login'] . '] - Arquivo:' . $erro->getFile() . ' Erro na linha:' . $erro->getLine() . ' - Mensagem:' . $erro->getMessage());
       }
    }
-   public function montaSelect2($rNome = 'categoria_id', $rSelecionado = null)
-   {
-      try {
-         $objCategorias = Categorias::getInstance(Conexao::getInstance());
-         $dados = $objCategorias->select(" ORDER BY nome");
-         $select = '';
-         $select = '<select class="select2" name="' . $rNome . '" id="' . $rNome . '" data-placeholder="Escolha uma categoria..." style="width: 100%;">'
-            . '<option value="">&nbsp;</option>';
-         foreach ($dados as $linhaDB) {
-            if (!empty($rSelecionado) && $rSelecionado === $linhaDB->id) {
-               $sAdd = 'selected';
-            } else {
-               $sAdd = '';
-            }
-            $select .= '<option value="' . $linhaDB->id . '"' . $sAdd . '>' . $linhaDB->nome . '</option>';
-         }
-         $select .= '</select>';
-         return $select;
-      } catch (PDOException $erro) {
-         Logger('Usuario:[' . $_SESSION['login'] . '] - Arquivo:' . $erro->getFile() . ' Erro na linha:' . $erro->getLine() . ' - Mensagem:' . $erro->getMessage());
-      }
-   }
+
    public function contaSemestres($rUsuarioID, $rCondicao = "")
    {
       try {

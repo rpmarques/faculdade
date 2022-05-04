@@ -37,6 +37,21 @@
                     </a> </li>
             </ul>
         </li>
+        <!-- TAREFAS -->
+        <li class="nav-item">
+            <a href="#" class="nav-link">
+                <i class="nav-icon fas fa-circle"></i>
+                <p> Tarefas <i class="right fas fa-angle-left"></i> </p>
+            </a>
+            <ul class="nav nav-treeview">
+                <li class="nav-item"> <a href="./tarefaIncluir.php" class="nav-link"> <i class="far fa-circle nav-icon"></i>
+                        <p>Incluir</p>
+                    </a> </li>
+                <li class="nav-item"> <a href="./tarefaListar.php" class="nav-link"> <i class="far fa-circle nav-icon"></i>
+                        <p>Listar</p>
+                    </a> </li>
+            </ul>
+        </li>
         <li class="nav-item">
             <a href="./logout.php" class="nav-link"> <i class="nav-icon fas fa-tachometer-alt"></i>
                 <p> Sair </p>
