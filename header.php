@@ -9,6 +9,8 @@ require_once './classes/materia.class.php';
 $objMateria = Materia::getInstance(Conexao::getInstance());
 require_once './classes/tipoAtividade.class.php';
 $objTipoAtividade = TipoAtividade::getInstance(Conexao::getInstance());
+require_once './classes/tarefa.class.php';
+$objTarefa = Tarefa::getInstance(Conexao::getInstance());
 session_start();
 if (!isset($_SESSION['login'])) {
   vaiPraPagina('index');
@@ -20,7 +22,7 @@ if (!isset($_SESSION['login'])) {
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Controle de Contas</title>
+  <title>Controle de Tarefas</title>
   <!-- Google Font: Source Sans Pro -->
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
   <!-- Font Awesome -->

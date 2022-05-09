@@ -1,35 +1,21 @@
 <?php
 require_once './header.php';
-// ["semestre_id"]=> string(1) "2" 
-// ["materia_id"]=> string(1) "1" 
-// ["datac"]=> string(10) "04/05/2022" 
-// ["data_venc"]=> string(10) "31/05/2022" 
-// ["nome_abrev"]=> string(4) "AAP1" 
-// ["gabarito"]=> string(0) "" 
-// ["finalizado"]=> string(2) "on" 
-// ["Observação"]=> string(0) "" 
 if ($_POST) {
   if (isset($_POST['semestre_id']) && isset($_POST['materia_id']) && isset($_POST['nome_abrev'])) {
     $semestreId = $_POST['semestre_id'];
     $materiaId = $_POST['materia_id'];
     $datac = $_POST['datac'];
-    $data_venc = $_POST['data_venc'];
-    $nomeAbrev = $_POST['nome_abrev'];
+    $dataVenc = $_POST['data_venc'];
+    $tipoAtividdeId = $_POST['nome_abrev'];
+    $tipoAtividade = $objTipoAtividade->pegaTipoAtividade($_POST['nome_abrev'], "1");
+    $nome = $tipoAtividade->nome;
     $gabarito = $_POST['gabarito'];
-    $finalizado = (isset($_POST['finalizado']) ? "TRUE" : "FALSE");
+    $finalizado = (isset($_POST['finalizado']) ? true : false);
     $observacao = $_POST['observacao'];
+    //insert($rSemenstreId, $rMateriaId, $rTipoAtividadeId, $rDatac, $rDataVenc, $rGabarito, $rFinalizado, $rObservacao, $rUsuarioID, $rNome)
+    $ret = $objTarefa->insert($semestreId, $materiaId, $datac, $dataVenc, $tipoAtividdeId, $gabarito, $finalizado, $observacao, $_SESSION['usuario_id'], $nome);
   }
 }
-
-// if (isset($_POST['nome'])) {
-//   $nome = $_POST['nome'];
-//   $cnpj = $_POST['cgc'];
-//   $fone1 = $_POST['fone1'];
-//   $fone2 = $_POST['fone2'];
-//   $email = $_POST['email'];
-//   $contato = '';
-//   $ret = $objClientes->insert($nome, $cnpj, $fone1, $fone2, $email, $contato);
-// }
 ?>
 <!-- Content Wrapper. Contains page content -->
 <div class="content-wrapper">
@@ -104,7 +90,7 @@ if ($_POST) {
                   <div class="col-md-12">
                     <div class="form-group">
                       <label>Observação</label>
-                      <input class="form-control form-control-sm " name="Observação" type="text">
+                      <input class="form-control form-control-sm " name="observacao" type="text">
                     </div>
                   </div>
                 </div>
