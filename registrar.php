@@ -24,7 +24,6 @@
       </div>
       <div class="card-body">
         <p class="login-box-msg">Registrar novo usuário</p>
-
         <form action="" method="post">
           <div class="input-group mb-3">
             <input type="text" class="form-control" placeholder="Nome Completo" name="nome">

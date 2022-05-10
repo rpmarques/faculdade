@@ -44,7 +44,7 @@
           <!-- small card -->
           <div class="small-box bg-info">
             <div class="inner">
-              <h3></h3>
+              <h3><?= $objTarefa->contaTarefas($_SESSION['usuario_id']); ?></h3>
               <p>Tarefas </p>
             </div>
             <div class="icon">

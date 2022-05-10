@@ -1,5 +1,13 @@
 <?php
 require_once './header.php';
+if ($_GET) {
+  if (isset($_GET['id'])) {
+    $tarefa = $objTarefa->pegaTarega(base64_decode($_GET['id']), $_SESSION['usuario_id']);
+    if (!empty($tarefa)) {
+      Logger("LOCALIZAMOS A TAREFA ID:[" . base64_decode($_GET['id']) . "]");
+    }
+  }
+}
 if ($_POST) {
   if (isset($_POST['semestre_id']) && isset($_POST['materia_id']) && isset($_POST['nome_abrev'])) {
     $semestreId = $_POST['semestre_id'];
@@ -38,59 +46,60 @@ if ($_POST) {
           <!-- general form elements -->
           <div class="card card-primary">
             <div class="card-header">
-              <h3 class="card-title">Cadastrar Tarefa</h3>
+              <h3 class="card-title">Editar Tarefa</h3>
             </div> <!-- /.card-header -->
             <!-- form start -->
             <form method="post">
+              <input type="hidden" name="id" value="<?= $tarefa->id ?>">
               <div class="card-body">
                 <div class="row">
                   <div class="col-md-2">
                     <div class="form-group">
                       <label>Semestre</label>
-                      <?= $objSemestre->montaSelect('semestre_id'); ?>
+                      <?= $objSemestre->montaSelect('semestre_id', $tarefa->semestre_id); ?>
                     </div>
                   </div>
                   <div class="col-md-4">
                     <div class="form-group">
                       <label>Matéria</label>
-                      <?= $objMateria->montaSelect('materia_id'); ?>
+                      <?= $objMateria->montaSelect('materia_id', $tarefa->materia_id); ?>
                     </div>
                   </div>
                   <div class="col-md-3">
                     <div class="form-group">
                       <label>Data Inicial</label>
-                      <input class="form-control form-control-sm data" name="datac" value="<?php echo date('d/m/Y') ?>">
+                      <input class="form-control form-control-sm data" name="datac" value="<?= formataData($tarefa->datac) ?>">
                     </div>
                   </div>
                   <div class="col-md-3">
                     <div class="form-group">
                       <label>Data Final</label>
-                      <input class="form-control form-control-sm data" name="data_venc">
+                      <input class="form-control form-control-sm data" name="data_venc" value="<?= formataData($tarefa->data_venc) ?>">
                     </div>
                   </div>
                   <div class="col-md-4">
                     <div class="form-group">
-                      <label>Tipo Atividade</label>
-                      <?= $objTipoAtividade->montaSelect('nome_abrev'); ?>
+                      <label>Tipo de Atividade</label>
+                      <?= $objTipoAtividade->montaSelect('nome_abrev', $tarefa->tipo_atividade_id); ?>
                     </div>
                   </div>
                   <div class="col-md-4">
                     <div class="form-group">
                       <label>Gabarito</label>
-                      <input class="form-control form-control-sm " name="gabarito" type="text">
+                      <input class="form-control form-control-sm " name="gabarito" type="text" value="<?= $tarefa->gabarito ?>">
                     </div>
                   </div>
                   <div class="col-md-2">
                     <div class="form-check">
                       <br><br>
-                      <input type="checkbox" class="form-check-input" id="exampleCheck1" name="finalizado">
+                      <input type="checkbox" class="form-check-input" id="exampleCheck1" name="finalizado" <?php echo $tarefa->finalizado === '1' ? 'checked' : ''; ?>>
                       <label class="form-check-label" for="exampleCheck1">Finalizado</label>
                     </div>
                   </div>
                   <div class="col-md-12">
                     <div class="form-group">
                       <label>Observação</label>
-                      <input class="form-control form-control-sm " name="observacao" type="text">
+                      <input class="form-control form-control-sm " name="observacao" type="text" value="<?= $tarefa->gabarito ?>">
                     </div>
                   </div>
                 </div>

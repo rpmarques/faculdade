@@ -1,5 +1,5 @@
 Sistema para controle de tarefas
 
-# Cadastro de Semestres 
-# Cadastro de Matérias 
-# Cadastro de Atividades
+# CRUD de Semestres 
+# CRUD de Matérias 
+# CRUD de Atividades

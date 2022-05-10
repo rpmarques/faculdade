@@ -68,13 +68,13 @@ class Tarefa
    {
       if (!empty($rID)) :
          try {
-            $sql = "DELETE FROM materia WHERE id=:id AND usuario_id=:usuario_id";
+            $sql = "DELETE FROM tarefa WHERE id=:id AND usuario_id=:usuario_id";
             $stm = $this->pdo->prepare($sql);
             $stm->bindValue(':id', $rID);
             $stm->bindValue(':usuario_id', $rUsuarioID);
             $stm->execute();
             if ($stm) {
-               Logger('Usuario:[' . $_SESSION['login'] . '] - EXCLUIU MATERIA - ID:[' . $rID . ']');
+               Logger('Usuario:[' . $_SESSION['login'] . '] - EXCLUIU TAREFA - ID:[' . $rID . ']');
             }
             return $stm;
          } catch (PDOException $erro) {
@@ -89,7 +89,10 @@ class Tarefa
          if (!empty($rWhere)) {
             $rWhere .= " AND $rWhere";
          }
-         $sql = "SELECT * FROM materia WHERE usuario_id=$rUsuarioID $rWhere ";
+         $sql = "SELECT tarefa.*,semestre.semestre,materia.nome AS nome_materia FROM tarefa 
+                  LEFT JOIN semestre ON semestre.id=tarefa.semestre_id
+                  LEFT JOIN materia  ON materia.id=tarefa.materia_id 
+                WHERE tarefa.usuario_id=$rUsuarioID $rWhere ";
          $stm = $this->pdo->prepare($sql);
          $stm->execute();
          $dados = $stm->fetchAll(PDO::FETCH_OBJ);
@@ -134,14 +137,14 @@ class Tarefa
    }
 
 
-   public function contaMaterias($rUsuarioID, $rCondicao = "")
+   public function contaTarefas($rUsuarioID, $rCondicao = "")
    {
       try {
          $waux = "";
          if (!empty($rCondicao)) {
             $waux = " AND $rCondicao  ";
          }
-         $sql = "SELECT count(id) AS total FROM materia WHERE usuario_id=$rUsuarioID  $waux ";
+         $sql = "SELECT count(id) AS total FROM tarefa WHERE usuario_id=$rUsuarioID  $waux ";
          $stm = $this->pdo->prepare($sql);
          $stm->execute();
          $dados = $stm->fetch(PDO::FETCH_OBJ);
@@ -151,10 +154,10 @@ class Tarefa
       }
    }
 
-   public function pegaMateria($rID, $rUsuarioID)
+   public function pegaTarega($rID, $rUsuarioID)
    {
       try {
-         $sql = "SELECT * FROM materia WHERE id=$rID AND usuario_id=$rUsuarioID";
+         $sql = "SELECT * FROM tarefa WHERE id=$rID AND usuario_id=$rUsuarioID";
          $stm = $this->pdo->prepare($sql);
          $stm->execute();
          $dados = $stm->fetch(PDO::FETCH_OBJ);

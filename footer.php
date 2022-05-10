@@ -2,7 +2,7 @@
   <div class="float-right d-none d-sm-block">
     <b>Versão</b> <?= $_SESSION['versao']; ?>
   </div>
-  <strong>Copyright &copy; 2021 <a href="#">Contas</a>.</strong> Contas a Pagar e Receber.
+  <strong>Copyright &copy; 2021 <a href="#">Tarefas</a>.</strong> Gerenciador de Tarefas.
 </footer>
 
 <!-- Control Sidebar -->
